@@ -16,3 +16,4 @@ dist
 activator-sbt-*-shim.sbt
 /bin
 .DS_Store
+/.target
