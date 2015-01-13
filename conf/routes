@@ -12,9 +12,8 @@ GET     /form                       controllers.Application.form()
 
 POST    /game/start                 controllers.Application.start()
 POST    /game/restart               controllers.Application.restart()
-POST    /game/move                  controllers.Application.move()
 GET     /game/load                  controllers.Application.load()
-
+POST    /game/move                  controllers.Application.move()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
