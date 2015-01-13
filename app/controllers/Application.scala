@@ -14,7 +14,6 @@ case class UserData(name: String)
 
 object Application extends Controller {
 
-  var counter =0
   val model = new GameEngine()
   
   val formx = Form(
@@ -25,11 +24,6 @@ object Application extends Controller {
   def start = Action {
     Ok(views.html.index("Hello Play Framework"))
   }
-
-  val gamepost = Form(
-    tuple(
-      "size" -> text,
-      "starter" -> text))
       
   def restart = Action { implicit request =>
 
@@ -37,38 +31,39 @@ object Application extends Controller {
     def size = values("size")
     def starter = values("starter")
 
-    model.reset(new Size(8, 8), Player.One);
-
+    //model.reset(new Size(8, 8), Player.One);
     
-    Ok(views.html.game("Game Screen"+counter))
+    Ok(views.html.game("Game Screen"))
   }
   
+   def index = Action {
+    var x = new TesteMe().hans()
+    
+    Ok(views.html.menu(x))
+  }
+   
   def move = Action { implicit request =>
-
     def values = formx.bindFromRequest.data
-    def col = values("c")
-    def row = values("r") 
     
-    model.doMoveAt(new Position(col.toInt,row.toInt))
+    model.doMoveAt(new Position(values("c").toInt,values("r").toInt))
     
-    Ok("["+getBoardList+"]") 
+   
+   Ok(getGameData) 
   }
 
+  def getGameData = {
+    var score_p1 = model.getScoreFor(Player.One);
+    var score_p2 = model.getScoreFor(Player.Two);
+    var str = "["+getBoardList+"]";
+   
+    Json.obj("next"->model.getPlayer,"sp1"->score_p1,"sp2"->score_p2,"board"->str).toString
+  }
 
   def load = Action {
-    /*Ok(JsObject(
-      Seq("t1"->Json.obj("row" ->1, "col" -> 2 , "val" ->1))
-      ))*/
-      // JsArray(ChatRoom.store.list.map(userToJson(_)))
-	  
-    /*
-    var v1=Json.obj("r" ->1, "c" -> 2 , "v" ->1);
-    
-    Ok("["+v1+","+v1+"]")*/
-    
-    
-    Ok("["+getBoardList+"]") 
+   Ok(getGameData) 
   }
+  
+ 
   
   def getBoardList = {
     var stones: List[String] = List()
@@ -81,56 +76,5 @@ object Application extends Controller {
     }
     
     stones.mkString (", ")
-  }
-
-  def testindex = Action {
-    Ok(views.html.index("Hello Play Framework"))
-  }
-
-  def index = Action {
-    var x = new TesteMe().hans()
-    
-    Ok(views.html.menu(x))
-  }
-
-  def hello(name: String) = Action {
-    Ok(views.html.index("Hello " + name))
-  }
-
-  def posthello() = Action(parse.tolerantFormUrlEncoded) { request =>
-    val paramVal = request.body.get("name").map(_.head)
-    paramVal map { _.toString } getOrElse ""
-
-    Ok(views.html.hello("Hello " + (paramVal map { _.toString } getOrElse "")))
-  }
-
-  def postname = Action { implicit request =>
-
-    def values = formx.bindFromRequest.data
-    def name = values("name")
-
-    Ok(views.html.hello("Hello: " + name))
-  }
-
-  /*
-  def postname() = Action { request =>
-   
-   val userForm = Form(mapping("name" -> text)(UserData.apply)(UserData.unapply))
-
-  userForm.bindFromRequest.fold(
-  formWithErrors => {
-    // binding failure, you retrieve the form containing errors:
-    BadRequest(views.html.hello(" error "))
-  },
-  userData => {
-
-    Ok(views.html.hello("Hello "+userData.name))
-  }
-)
-
-  } */
-
-  def form = Action {
-    Ok(views.html.form("Show me the form"))
   }
 }

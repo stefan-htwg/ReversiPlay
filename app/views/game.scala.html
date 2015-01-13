@@ -1,19 +1,45 @@
 @(message: String)
 
-@main("Welcome to Play Framework") {
+@main("Play with us reversi") {
 
-    <div class="well">
-        <h1>@message</h1>
-    </div>
+<div id="nextplayer">
 
+<table border="0" width="100%" align="center">
+<tr>
+<td>
+<div id="iconHome"><div id="whitesc">1</div></div>
+
+</td>
+<td align="center" class="infomsg">
+Next move: <div id="nextmove" class="starter blue"></div>
+</td>
+<td align="right">
+<div id="iconGuest"><div id="blacksc">1</div></div>
+
+</td>
+</tr>
+<tr>
+<td><span id="player_name_home" class="player_name">Spieler #1</span></td>
+<td>&nbsp;</td>
+<td align="right"><span id="player_name_guest" class="player_name">Spieler #2</span></td>
+</tr>
+<tr>
+</tr>
+</table>
+
+</div>
+
+	<div class="menu">
+		<button class="menu" data-act="restart">Restart</button>	
+	</div>
 	<div id="field" class="well">
 	
 	
-<table border=0 cellpadding=0 cellspacing=0 align=center>
+<table border="0" cellpadding="0" cellspacing="0" align="center">
 <tr>
-<td><div id="sq1x1" onclick="clickat(1,1);" class="starter blue"></div></td>
-<td><div id="sq1x2" onclick="clickat(1,2);" class="starter red"></div></td>
-<td><div id="sq1x3" onclick="clickat(1,3);" class="starter empty"></div></td>
+<td><div id="sq1x1" onclick="clickat(1,1);" class="starter"></div></td>
+<td><div id="sq1x2" onclick="clickat(1,2);" class="starter"></div></td>
+<td><div id="sq1x3" onclick="clickat(1,3);" class="starter"></div></td>
 <td><div id="sq1x4" onclick="clickat(1,4);" class="starter"></div></td>
 <td><div id="sq1x5" onclick="clickat(1,5);" class="starter"></div></td>
 <td><div id="sq1x6" onclick="clickat(1,6);" class="starter"></div></td>

@@ -1,5 +1,7 @@
 package controllers
 
+import java.lang.Boolean
+
 class GameEngine(boardSize: Size) {
   private var gameStatus = GameStatus.NotStarted
   private var board = new Board(boardSize)
@@ -212,15 +214,16 @@ class GameEngine(boardSize: Size) {
     }
   }
 
-  private def doMove(position: Position) {
+  private def doMove(position: Position): Boolean =  {
     if (!isValidMove(position, currentPlayer)) {
       Logger.info("not a valid move");
-      return ;
+      return false
     }
 
     setCellValueAt(position, currentPlayer);
     doInBetweens(position, currentPlayer);
     prepareNextMove();
+    return true
   }
 
   private def isComputersMove(): Boolean = {

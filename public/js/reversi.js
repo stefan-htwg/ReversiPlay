@@ -1,26 +1,61 @@
-$(function(){
-	console.log("ready");
-	
-	var url= "http://localhost:9000/game/load";
-	
-	
-	$.ajax(url).success(
-		function(data){ 
-//			var v =  data; 
-			var list =  $.parseJSON(data); // nur wenn als string Ÿbermittelt
-			//v.length
-			l(list.length);
+function l(s){
+	console.log(s);
+}
 
-			drawBoad(list);
-			
+function errorMessage(msg){
+	l(msg);
+}
+
+function AjaxService() {
+	return {get : function(url, data, success, error) {
+		$.getJSON(url, data).done(success).fail(error);
+	},post : function(url, data, success, error) {
+		$.ajax( {
+			url : url,
+			type : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify(data),
+			// processData: false, // this is optional
+			dataType : 'json'
+		}).done(success).fail(error);
+	}};
+}
+
+var server = "http://localhost:9000/" 
+	
+$(function(){
+	/**
+	 * Config
+	 */
+	
+	/*$.ajax(getUrl("game/load")).success(
+		function(data){ 
+			// parseJSON nur wenn als string Ÿbermittelt
+			drawBoad($.parseJSON(data));			
 		}
-	);/**/
+	);	*/
 	
+	AjaxService().get(getUrl("game/load"),"",function(data){ 
+		drawBoad(data);			
+	},errorMessage);
 	
+	$(".menu").find("button").click(function(obj){
+		l($(this).data("act"));
+	});
 	
+	//load game options
 	
+	$("#iconHome").addClass("w");
+	$("#iconGuest").addClass("b");
+	
+	$("#nextmove").attr("class","starter blue");
+	$("#nextmove").attr("class","starter red");	
 });
 
+
+function getUrl(path){
+	return server+path;
+}
 
 function clearBoard(){
 	for(var i=1;i<=8;i++){
@@ -30,7 +65,17 @@ function clearBoard(){
 	}
 }
 
-function drawBoad(list){
+function drawBoad(resp){
+	var list= $.parseJSON(resp.board);
+	
+	if(resp.next==1){
+		$("#nextmove").attr("class","starter blue");
+	}else
+		$("#nextmove").attr("class","starter red");
+	
+	$("#blacksc").html(resp.sp1);
+	$("#whitesc").html(resp.sp2);
+	
 	clearBoard();
 	jQuery.each(list, function(i,o){
 		if(o.v==1)
@@ -40,25 +85,11 @@ function drawBoad(list){
 	});
 }
 
-function l(s){
-	console.log(s);
-}
+
 
 function clickat(x,y){
  l("x/y: "+x+"/"+y);
- $("#sq"+x+"x"+y).addClass("blue");
- 
- var data = { r: y, c: x };
-	
- $.ajax({
-	  type: "POST",
-	  url: "http://localhost:9000/game/move",
-	  data: data,
-	  success: function(list){
-		  drawBoad(list)
-	  },
-	  dataType: "json"
-	}).fail(function(e) {
-	    l(e);
-	  });
+ AjaxService().post(getUrl("game/move"), { r: y, c: x }, function(resp){
+	  drawBoad(resp)
+ }, errorMessage);
 }

@@ -3,10 +3,6 @@
 # ~~~~
 
 GET     /                           controllers.Application.index()
-GET     /hello/:name                controllers.Application.hello(name: String)
-POST    /postname                   controllers.Application.postname()
-POST    /posthello                  controllers.Application.posthello()
-GET     /form                       controllers.Application.form()
 
 #Game Actions
 
