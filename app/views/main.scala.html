@@ -4,27 +4,12 @@
 <html>
 <head>
     <title>@title</title>
-    <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
     <script type='text/javascript' src='@routes.Assets.at("js/reversi.js")'></script>
-    <link rel='stylesheet' href='@routes.Assets.at("css/style.css")'>
     <link rel='stylesheet' href='@routes.Assets.at("css/reversi.css")'>
-    
-    <style>
-    body {
-        margin-top: 50px;
-    }
-    </style>
 </head>
-<body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a id="titleLink" class="brand" href="/">@title</a>
-            </div>
-        </div>
-    </div>
+<body marginheight="0" marginwidth="0">
+ 
     <div class="container">
         @content
     </div>

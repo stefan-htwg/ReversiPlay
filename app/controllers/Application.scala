@@ -68,7 +68,7 @@ object Application extends Controller {
   def getBoardList = {
     var stones: List[String] = List()
 
-    for (row <- 1 until 8; column <- 1 until 8) {
+    for (row <- 1 to 8; column <- 1 to 8) {
     	var value= model.getCellValue(new Position(column, row));
     	if(value>0){
     	  stones ::= Json.obj("r" ->row, "c" -> column , "v" ->value).toString
