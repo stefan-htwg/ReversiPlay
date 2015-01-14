@@ -15,6 +15,22 @@ class ApplicationSpec extends Specification {
 
   "Application" should {
 
+    "render the index page" in new WithApplication{
+      val home = route(FakeRequest(POST, "/game/restart")).get
+
+      status(home) must equalTo(OK)
+      contentType(home) must beSome.which(_ == "text/html")
+      contentAsString(home) must contain ("Next move")
+    }
+    
+    "load game" in new WithApplication{
+      val home = route(FakeRequest(GET, "/game/load")).get
+
+      status(home) must equalTo(OK)
+      contentType(home) must beSome.which(_ == "text/html")
+      contentAsString(home) must contain ("next1")
+    }
+     
     "send 404 on a bad request" in new WithApplication{
       route(FakeRequest(GET, "/boum")) must beNone
     }
