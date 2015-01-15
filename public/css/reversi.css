@@ -2,13 +2,20 @@
 
 div.menu{
 	height: 40px;	
-	text-align: right;
+	background-color: #ccc;
 }
 
+.title{
+	float:left;
+	font-size:25px;
+	font-weight: normal;
+	padding-top:5px;
+	padding-left:10px;	
+}
 
 .line {
 	height: 10px;
-	background-position: 0px 0px;
+	background-position: 0px -3px;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-image: url("../images/line.png");
