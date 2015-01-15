@@ -1,3 +1,17 @@
+function basicDialog($dialog,callback){
+	var callback = callback || function(){};
+	$("#overlay").show();
+	$dialog.show();
+	$dialog.addClass("active").find("button").unbind().mouseup(function()
+	{
+		$(this).unbind();
+		$('#overlay').hide();
+		$dialog.removeClass("active");
+		callback($(this).data("action"));
+	});		
+}
+
+
 function l(s){
 	console.log(s);
 }
@@ -21,6 +35,16 @@ function AjaxService() {
 	}};
 }
 
+function menuHandler(act){
+	if(act=="restart"){
+		AjaxService().post(getUrl("game/restart"),"",function(data){ 
+			AjaxService().get(getUrl("game/load"),"",function(data){ 
+				drawBoad(data);			
+			},errorMessage);	
+		},errorMessage);
+	}
+}
+
 var server = "http://localhost:9000/" 
 	
 $(function(){
@@ -28,19 +52,22 @@ $(function(){
 	 * Config
 	 */
 	
-	/*$.ajax(getUrl("game/load")).success(
-		function(data){ 
-			// parseJSON nur wenn als string Ÿbermittelt
-			drawBoad($.parseJSON(data));			
-		}
-	);	*/
+	$("#overlay").show();
+	$("#dialogStart").addClass("active").find("button").unbind().mouseup(function()
+			{
+				$(this).unbind();
+				$('#overlay').hide();
+				$("#dialogStart").removeClass("active");
+				menuHandler($(this).data("action"));
+			});	
 	
 	AjaxService().get(getUrl("game/load"),"",function(data){ 
 		drawBoad(data);			
 	},errorMessage);
 	
-	$(".menu").find("button").click(function(obj){
-		l($(this).data("act"));
+	
+	$("#optionclick").click(function(){
+		basicDialog($("#dialogBreak"),menuHandler);
 	});
 	
 	//load game options
@@ -67,6 +94,13 @@ function clearBoard(){
 
 function drawBoad(resp){
 	var list= $.parseJSON(resp.board);
+	
+	l(resp.status);
+	if(resp.status=="GameOver"){
+		$("#finHome").addClass("w");
+		$("#finGuest").addClass("b");
+		basicDialog($("#dialogOver"),menuHandler);
+	}
 	
 	if(resp.next==1){
 		$("#nextmove").attr("class","starter blue");

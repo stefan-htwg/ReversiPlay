@@ -9,9 +9,75 @@
     <link rel='stylesheet' href='@routes.Assets.at("css/reversi.css")'>
 </head>
 <body marginheight="0" marginwidth="0">
- 
+  	<div id="overlay"></div> 
+  
     <div class="container">
         @content
     </div>
+    
+     
+    <div class="message" id="dialogBreak">
+			<div style="margin-top: 50px;">
+				OPTIONEN 
+				<br>
+				<br>	
+				<img alt="" src="/assets/images/icon.png" width="340">				
+			</div>
+			<button class="btnnew" data-action="back">
+				Weiterspielen 
+			</button>
+			<button class="btnnew" data-action="restart">
+				Spiel neustarten 
+			</button>
+		</div>
+	<div class="message" id="dialogStart" style="display:block;">
+			<div style="margin-top: 50px;">
+				<div class="title">Reversi</div>
+				<br/> 
+				<br>
+				<img alt="" src="/assets/images/icon.png" width="340">			
+			</div>
+			<button class="btnnew" data-action="restart">
+				Spiel starten 
+			</button>
+		</div>	
+		
+		<div class="message" id="dialogOver" style="display:block;">
+			<div style="margin-top: 50px;">
+				<div class="titleover">Game Over</div>
+				<div id="nextplayer">
+<br/> 
+				<br>
+<table border="0" width="340" align="center">
+<tr>
+<td>
+<div id="finHome"><div id="whitesc">1</div></div>
+
+</td>
+<td align="center" class="infomsg"></td>
+<td align="right">
+<div id="finGuest"><div id="blacksc">1</div></div>
+
+</td>
+</tr>
+<tr>
+<td align="left"><span id="player_name_home" class="player_name">Spieler #1</span></td>
+<td>&nbsp;</td>
+<td align="right"><span id="player_name_guest" class="player_name">Spieler #2</span></td>
+</tr>
+<tr>
+</tr>
+</table>
+
+</div>
+
+				<br/> 
+				<br>
+			</div>
+			<button class="btnnew" data-action="restart">
+				Spiel neustarten 
+			</button>
+		</div>	
+		
 </body>
 </html>

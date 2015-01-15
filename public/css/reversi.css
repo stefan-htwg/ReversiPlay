@@ -104,15 +104,17 @@ div.menu{
 	padding-top: 20px;
 }
 
-#iconGuest.b,#iconHome.b {
+#iconGuest.b,#iconHome.b, #finGuest.b,#finHome.b {
 	color: #fff;
 }
 
-#iconHome.w,#iconGuest.w {
+#iconHome.w,#iconGuest.w, #finHome.w,#finGuest.w  {
 	color: #000;
 }
 
-#iconGuest.b,#iconHome.b,#iconHome.w,#iconGuest.w {
+#iconGuest.b,#iconHome.b,#iconHome.w,#iconGuest.w,
+#finGuest.b,#finHome.b,#finHome.w,#finGuest.w
+ {
 	width: 100px; /*50*/
 	height: 100px;
 	background-repeat: no-repeat;
@@ -120,11 +122,15 @@ div.menu{
 	background-position: bottom;
 }
 
-#iconGuest.b,#iconHome.b {
+#iconGuest.b,#iconHome.b, 
+#finGuest.b,#finHome.b 
+{
 	background-image: url("../images/user_black.png");
 }
 
-#iconHome.w,#iconGuest.w {
+#iconHome.w,#iconGuest.w,
+#finHome.w,#finGuest.w
+ {
 	background-image: url("../images/user_white.png");
 }
 
@@ -375,4 +381,195 @@ body {
 	height: 25px;
 	border-right: 1px solid #000000;
 	background: #fff;
+}
+
+
+.dialog {
+	width: 80%;
+	height: 240px;
+	padding: 0px;
+	border-radius: 4px;
+	background-color:#fff;
+	background-position: right;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -40%;
+	margin-top: -110px;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: visibility 0s linear 0.3s, opacity 0.3s,
+		-webkit-transform 0.3s;
+	transition: visibility 0s linear 0.3s, opacity 0.3s, transform 0.3s;
+	-webkit-transform: scale(0.75);
+	transform: scale(0.75);
+	z-index: 10;
+	font-size: 35px;
+	text-align: center;
+}
+
+.dialog.active {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.dialog .buttons {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	text-align: center;
+}
+
+.dialog .buttons button {
+	margin-top: 5px;	
+}
+
+.text-button {
+	width:100%;
+	border:3px solid #000;
+	background: url(../../i/button.png) repeat-x;
+	background-size: 100% 100%;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+	}
+
+.text-button {
+	padding: 0;
+	
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 25px;
+	padding: 15px 10px 10px 0px;
+	cursor: pointer;
+}
+
+.css-button{
+	background-color: #BDC3C7;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+	border:0;
+	border:none;
+	outline: 0;
+	box-shadow: none;
+	padding:10px;
+	height: 50px;
+	width:100%;
+	}
+	
+.mtop5{
+	margin-top: 20px;
+}	
+
+
+div.title{	
+	margin-left:67px;
+	width:340px;
+	font-size: 82px;
+	text-transform: uppercase;
+}
+
+div.titleover{	
+	margin-left:77px;
+	width:340px;
+	font-size: 57px;
+	text-transform: uppercase;
+}
+
+
+.btnnew
+{
+	width: 340px;
+	border: 0px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-family: 'Lato', sans-serif !important;
+	font-weight: 700 !important;
+	color: #f7f5e7;
+	font-size: 14px;
+	background: #999;
+	padding: 25px 0px 25px 0px;
+	text-decoration: none;
+	margin: 10px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+.btnnew:hover
+{
+	background: #ccc;
+	text-decoration: none;
+	box-shadow: 0px 1px 0px #000;
+}
+
+#optionclick:hover
+{
+	cursor:pointer;
+}
+
+#overlay {
+	background-color:black;
+	opacity: 0.4;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.message {
+
+	font-size: 20px;
+	font-weight: 400 !important;
+	text-align: center;
+	color: #000;
+	background-color: #f6f4e6;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 100%;
+	max-width: 500px;
+	height: 100%;
+	position: absolute;
+	left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top:0;
+    bottom:0;
+    margin-top:auto;
+    margin-bottom:auto;
+        
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: visibility 0s linear 0.3s, opacity 0.3s,
+	-webkit-transform 0.3s;
+	transition: visibility 0s linear 0.3s, opacity 0.3s, transform 0.3s;
+	-webkit-transform: scale(0.75);
+	transform: scale(0.75);
+	z-index: 10;
+}
+
+#dialogStart.message, #dialogOver.message{
+	background-color: #fff;
+}
+
+.message.active {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+	-webkit-transform: scale(1);
+	transform: scale(1);
 }

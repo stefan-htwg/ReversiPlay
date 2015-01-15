@@ -31,15 +31,14 @@ object Application extends Controller {
     def size = values("size")
     def starter = values("starter")
 
-    //model.reset(new Size(8, 8), Player.One);
+    model.reset(new Size(8, 8), Player.One);
     
-    Ok(views.html.game("Game Screen"))
+    Ok(Json.obj("action"->"/game/load").toString)
   }
   
    def index = Action {
-    var x = new TesteMe().hans()
     
-    Ok(views.html.menu(x))
+    Ok(views.html.game("Game Screen"))
   }
    
   def move = Action { implicit request =>
@@ -52,11 +51,12 @@ object Application extends Controller {
   }
 
   def getGameData = {
-    var score_p1 = model.getScoreFor(Player.One);
-    var score_p2 = model.getScoreFor(Player.Two);
-    var str = "["+getBoardList+"]";
-   
-    Json.obj("next"->model.getPlayer,"sp1"->score_p1,"sp2"->score_p2,"board"->str).toString
+    val score_p1 = model.getScoreFor(Player.One);
+    val score_p2 = model.getScoreFor(Player.Two);
+    val str = "["+getBoardList+"]";
+    val status = model.getGameStatus
+    
+    Json.obj("status"->status.toString,"next"->model.getPlayer,"sp1"->score_p1,"sp2"->score_p2,"board"->str).toString
   }
 
   def load = Action {
