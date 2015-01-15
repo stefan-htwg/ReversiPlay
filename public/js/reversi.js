@@ -92,14 +92,22 @@ function clearBoard(){
 	}
 }
 
+var withe=0;
+var black=0;
+
 function drawBoad(resp){
 	var list= $.parseJSON(resp.board);
 	
-	l(resp.status);
 	if(resp.status=="GameOver"){
 		$("#finHome").addClass("w");
 		$("#finGuest").addClass("b");
+		$("#blackfin").html($("#blacksc").html());
+		$("#whitefin").html($("#whitesc").html());
+		
 		basicDialog($("#dialogOver"),menuHandler);
+	}else{
+		$("#blacksc").html(resp.sp1);
+		$("#whitesc").html(resp.sp2);
 	}
 	
 	if(resp.next==1){
@@ -107,8 +115,7 @@ function drawBoad(resp){
 	}else
 		$("#nextmove").attr("class","starter red");
 	
-	$("#blacksc").html(resp.sp1);
-	$("#whitesc").html(resp.sp2);
+	
 	
 	clearBoard();
 	jQuery.each(list, function(i,o){
